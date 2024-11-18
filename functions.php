@@ -36,8 +36,7 @@ add_action('after_setup_theme', 'survey_setup');
 
 function survey_scripts()
 {
-	wp_enqueue_style('survey-style', get_stylesheet_uri(), array(), _S_VERSION);
-	// wp_enqueue_script( 'survey-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
-
+	wp_enqueue_style('survey-style', get_template_directory_uri() . "/build/output.css", array(), _S_VERSION);
+	wp_enqueue_script('survey-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array(), _S_VERSION, true);
 }
 add_action('wp_enqueue_scripts', 'survey_scripts');
