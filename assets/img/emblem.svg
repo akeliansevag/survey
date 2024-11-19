@@ -1,0 +1,19 @@
+<svg id="Group_489" data-name="Group 489" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="29" viewBox="0 0 48 29">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.027" y1="0.517" x2="3.536" y2="0.44" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ed267c"/>
+      <stop offset="0.2" stop-color="#ec2464"/>
+      <stop offset="0.4" stop-color="#ec2353"/>
+      <stop offset="0.5" stop-color="#ec234d"/>
+      <stop offset="0.7" stop-color="#ec2249"/>
+      <stop offset="0.8" stop-color="#ec223f"/>
+      <stop offset="0.9" stop-color="#ec222e"/>
+      <stop offset="1" stop-color="#ed2224"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-0.428" y1="0.515" x2="1.721" y2="0.479" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" x1="-1.257" y1="0.527" x2="0.892" y2="0.491" xlink:href="#linear-gradient"/>
+  </defs>
+  <path id="Path_27" data-name="Path 27" d="M12.865,21.468a6.654,6.654,0,0,1-6.541,6.768A6.558,6.558,0,0,1-.1,21.468,6.654,6.654,0,0,1,6.441,14.7a6.654,6.654,0,0,1,6.541,6.768" transform="translate(0.1 0.703)" fill="url(#linear-gradient)"/>
+  <path id="Path_28" data-name="Path 28" d="M19.189,5.467C18.489,3.25,17.437,1.5,13.817,1.5A6.579,6.579,0,0,0,7.509,9.2c.584,4.784,4.2,3.967,7.125,5.951C18.372,17.72,15.685,21.687,16.62,26c1.4,7.118,12.965,5.368,12.5-2.334h0a5.325,5.325,0,0,0-3.387-4.9L21.993,16.9c-2.686-1.634-2.57-5.484-2.57-8.752a16.429,16.429,0,0,0-.234-2.684" transform="translate(1.208 -1.5)" fill-rule="evenodd" fill="url(#linear-gradient-2)"/>
+  <path id="Path_29" data-name="Path 29" d="M34.589,5.467C33.889,3.25,32.837,1.5,29.217,1.5a6.579,6.579,0,0,0-6.307,7.7c.584,4.784,4.2,3.967,7.125,5.951C33.772,17.72,31.085,21.687,32.02,26c1.4,7.118,12.965,5.368,12.5-2.334h0a5.325,5.325,0,0,0-3.387-4.9L37.393,16.9c-2.686-1.634-2.57-5.484-2.57-8.752a16.429,16.429,0,0,0-.234-2.684" transform="translate(3.469 -1.5)" fill-rule="evenodd" fill="url(#linear-gradient-3)"/>
+</svg>

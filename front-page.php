@@ -1,3 +1,6 @@
 <?php get_header(); ?>
-<h1>HOMEPAGE</h1>
+
+<div class="container">
+    <?php the_content(); ?>
+</div>
 <?php get_footer(); ?>
