@@ -52,27 +52,6 @@ textarea {
   transform: translateX(calc(-100%-7px));
 }
 
-/* .wpforms-field-radio ul {
-  @apply !gap-[40px];
+.wpforms-field-radio ul {
+  @apply max-md:flex-col md:gap-10 !important;
 }
-
-
-
-.wpforms-field-label {
-  display: flex !important;
-  gap: 10px;
-  align-items: center;
-}
-.wpforms-field-label::before {
-  content: " ";
-  width: 48px;
-  height: 29px;
-  display: block;
-  background-image: url("../assets/img/emblem.svg");
-}
-
-.wpforms-field ul,
-.wpforms-field textarea,
-em.wpforms-error {
-  margin-left: 58px !important;
-} */
