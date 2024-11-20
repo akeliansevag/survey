@@ -26,13 +26,37 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 @tailwind components;
 @tailwind utilities;
 
-.wpforms-field-radio ul {
-  @apply !gap-[40px];
-}
-
 textarea {
   max-width: 400px;
 }
+.wpforms-form {
+  margin-left: 60px !important;
+}
+.wpforms-field {
+  position: relative !important;
+  margin-bottom: 15px !important;
+}
+
+.wpforms-conditional-field {
+  padding-top: 0 !important;
+}
+
+.wpforms-field:not(.wpforms-conditional-field)::before {
+  content: " ";
+  width: 48px;
+  height: 29px;
+  display: block;
+  position: absolute;
+  background-image: url("../assets/img/emblem.svg");
+  top: 10px;
+  transform: translateX(calc(-100%-7px));
+}
+
+/* .wpforms-field-radio ul {
+  @apply !gap-[40px];
+}
+
+
 
 .wpforms-field-label {
   display: flex !important;
@@ -51,4 +75,4 @@ textarea {
 .wpforms-field textarea,
 em.wpforms-error {
   margin-left: 58px !important;
-}
+} */
