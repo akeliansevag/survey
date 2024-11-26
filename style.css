@@ -55,3 +55,8 @@ textarea {
 .wpforms-field-radio ul {
   @apply max-md:flex-col md:gap-10 !important;
 }
+
+h2 {
+  font-weight: bold;
+  font-size: 30px;
+}
