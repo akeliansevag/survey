@@ -4,7 +4,7 @@
 </section>
 <section>
     <div class="container text-center pt-20 pb-10">
-        <h1 class="text-4xl font-bold mb-2">Post Event Survey</h1>
+        <h1 class="text-4xl font-bold mb-2">Post Event Surveyssssss</h1>
         <p class="text-xl">Please take a few moments to fill in this survey.</p>
         <h2 class="text-3xl mt-5">WAS #19 Istanbul 16-18 April 2024</h2>
     </div>
