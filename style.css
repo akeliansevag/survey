@@ -32,6 +32,10 @@ textarea {
 .wpforms-form {
   margin-left: 60px !important;
 }
+
+.no-logo .wpforms-form {
+  margin-left: 0 !important;
+}
 .wpforms-field {
   position: relative !important;
   margin-bottom: 15px !important;
