@@ -52,6 +52,10 @@ textarea {
   transform: translateX(calc(-100%-7px));
 }
 
+.no-logo .wpforms-field::before {
+  display: none !important;
+}
+
 .wpforms-field-radio ul {
   @apply max-md:flex-col md:gap-10 !important;
 }
