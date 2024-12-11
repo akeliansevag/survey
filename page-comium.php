@@ -12,8 +12,8 @@
 
 <body <?php body_class(); ?>>
     <section>
-        <div class="container text-center pt-20 pb-10">
-            <h1>Comium</h1>
+        <div class="container pt-20 pb-10">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/logo-comium.svg" alt="Logo Comium">
         </div>
     </section>
 
