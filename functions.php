@@ -68,11 +68,11 @@ function get_wpforms_entries($request)
 	}
 
 	// Process the fields JSON for each entry
-	foreach ($entries as &$entry) {
-		if (!empty($entry['fields'])) {
-			$entry['fields'] = json_decode($entry['fields'], true); // Convert JSON to an array
-		}
-	}
+	// foreach ($entries as $entry) {
+	// 	if (!empty($entry['fields'])) {
+	// 		$entry['fields'] = json_decode($entry['fields'], true); // Convert JSON to an array
+	// 	}
+	// }
 
 	return rest_ensure_response($entries);
 }
