@@ -58,7 +58,7 @@ function get_wpforms_entries($request)
 
 	// Fetch data
 	$entries = $wpdb->get_results(
-		$wpdb->prepare("SELECT entry_id, date FROM {$entries_table} WHERE form_id = %d", $form_id)
+		$wpdb->prepare("SELECT entry_id, date FROM wp_wpforms_entries WHERE form_id = %d", $form_id)
 	);
 
 	if (empty($entries)) {
