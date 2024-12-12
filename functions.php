@@ -79,3 +79,19 @@ function get_wpforms_entries($request)
 
 	return rest_ensure_response($entries);
 }
+
+add_action('rest_api_init', function () {
+	register_rest_route('wpforms/v1', '/forms', [
+		'methods' => 'GET',
+		'callback' => 'get_wpforms_list',
+	]);
+});
+
+function get_wpforms_list()
+{
+	$forms = wpforms()->form->get();
+	if (empty($forms)) {
+		return new WP_Error('no_forms', 'No forms found', ['status' => 404]);
+	}
+	return rest_ensure_response($forms);
+}
