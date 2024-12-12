@@ -58,9 +58,9 @@ function get_wpforms_entries($request)
 
 	// Fetch data
 	$entries = $wpdb->get_results(
-		$wpdb->prepare("SELECT id, date FROM wp_wpforms_entries WHERE form_id = '77'")
+		$wpdb->prepare("SELECT entry_id, date FROM {$entries_table} WHERE form_id = %d", $form_id)
 	);
-	var_dump($entries);
+
 	if (empty($entries)) {
 		return new WP_Error('no_entries', 'No entries found for this form', ['status' => 404]);
 	}
