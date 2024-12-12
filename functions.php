@@ -46,9 +46,6 @@ add_action('rest_api_init', function () {
 	register_rest_route('wpforms/v1', '/entries/(?P<form_id>\d+)', [
 		'methods' => 'GET',
 		'callback' => 'get_wpforms_entries',
-		'permission_callback' => function () {
-			return true; // Force public access
-		},
 	]);
 });
 
@@ -88,9 +85,6 @@ add_action('rest_api_init', function () {
 	register_rest_route('wpforms/v1', '/forms', [
 		'methods' => 'GET',
 		'callback' => 'get_wpforms_list',
-		'permission_callback' => function () {
-			return true; // Force public access
-		},
 	]);
 });
 
