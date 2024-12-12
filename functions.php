@@ -71,10 +71,10 @@ function get_wpforms_entries($request)
 
 	foreach ($entries as $key => $entry) {
 		if (!empty($entry->fields)) {
-			$entry->fields = (array)json_decode($entry->fields); // Convert JSON to an array
+			$entry->fields = (array)json_decode($entry->fields, true); // Convert JSON to an array
 
 		}
-		$entries[$key]->fields = $entry->fields;
+		$entries[$key]->fields = array_values($entry->fields);
 	}
 
 	return rest_ensure_response($entries);
