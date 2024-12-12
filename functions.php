@@ -73,7 +73,7 @@ function get_wpforms_entries($request)
 		$entry->fields = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT * FROM {$fields_table} WHERE entry_id = %d",
-				$entry->id
+				$entry->entry_id
 			)
 		);
 	}
