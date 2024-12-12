@@ -79,7 +79,6 @@ function get_wpforms_entries($request)
 				$entry->entry_id
 			)
 		);
-		var_dump($fields);
 		// Create a new object or array with fields added
 		$updated_entry = (array) $entry; // Convert object to array
 		$updated_entry['fields'] = $fields; // Add fields
