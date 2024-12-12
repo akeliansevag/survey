@@ -51,41 +51,28 @@ add_action('rest_api_init', function () {
 
 function get_wpforms_entries($request)
 {
-	function get_form_entries($request)
-	{
-		global $wpdb;
+	global $wpdb;
+	$form_id = intval($request['form_id']);
+	$entries_table = $wpdb->prefix . 'wpforms_entries';
 
-		// Validate and sanitize the form ID from the request
-		$form_id = isset($request['form_id']) ? intval($request['form_id']) : 0;
-		if ($form_id <= 0) {
-			return new WP_Error('invalid_form_id', 'Invalid form ID', ['status' => 400]);
-		}
+	// Fetch entries
+	$entries = $wpdb->get_results(
+		$wpdb->prepare(
+			"SELECT * FROM {$entries_table} WHERE form_id = %d",
+			$form_id
+		)
+	);
 
-		// Define the entries table
-		$entries_table = $wpdb->prefix . 'wpforms_entries';
-
-		// Fetch entries from the database
-		$entries = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$entries_table} WHERE form_id = %d",
-				$form_id
-			),
-			ARRAY_A // Return results as an associative array
-		);
-
-		// Check if no entries are found
-		if (empty($entries)) {
-			return new WP_Error('no_entries', 'No entries found for this form', ['status' => 404]);
-		}
-
-		// Process the fields JSON for each entry
-		foreach ($entries as &$entry) {
-			if (!empty($entry['fields'])) {
-				$entry['fields'] = json_decode($entry['fields'], true); // Convert JSON to an array
-			}
-		}
-
-		// Return the processed entries
-		return rest_ensure_response($entries);
+	if (empty($entries)) {
+		return new WP_Error('no_entries', 'No entries found for this form', ['status' => 404]);
 	}
+
+	// Process the fields JSON for each entry
+	foreach ($entries as &$entry) {
+		if (!empty($entry['fields'])) {
+			$entry['fields'] = json_decode($entry['fields'], true); // Convert JSON to an array
+		}
+	}
+
+	return rest_ensure_response($entries);
 }
