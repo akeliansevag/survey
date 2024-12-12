@@ -89,6 +89,7 @@ add_action('rest_api_init', function () {
 
 function get_wpforms_list()
 {
+	var_dump("test");
 	$forms = wpforms()->form->get();
 	if (empty($forms)) {
 		return new WP_Error('no_forms', 'No forms found', ['status' => 404]);
