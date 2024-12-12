@@ -68,15 +68,25 @@ function get_wpforms_entries($request)
 		return new WP_Error('no_entries', 'No entries found for this form', ['status' => 404]);
 	}
 
-	// Fetch fields for each entry
+	// Create an array to hold the updated entries
+	$updated_entries = [];
+
 	foreach ($entries as $entry) {
-		$entry->fields = $wpdb->get_results(
+		// Fetch fields for the current entry
+		$fields = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT * FROM {$fields_table} WHERE entry_id = %d",
 				$entry->entry_id
 			)
 		);
+
+		// Create a new object or array with fields added
+		$updated_entry = (array) $entry; // Convert object to array
+		$updated_entry['fields'] = $fields; // Add fields
+
+		// Add to the updated entries array
+		$updated_entries[] = $updated_entry;
 	}
 
-	return rest_ensure_response($entries);
+	return rest_ensure_response($updated_entries);
 }
