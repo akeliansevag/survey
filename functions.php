@@ -51,41 +51,41 @@ add_action('rest_api_init', function () {
 
 function get_wpforms_entries($request)
 {
-	global $wpdb;
-	$form_id = intval($request['form_id']);
-	$entries_table = $wpdb->prefix . 'wpforms_entries';
-	$fields_table = $wpdb->prefix . 'wpforms_entry_fields';
+	function get_form_entries($request)
+	{
+		global $wpdb;
 
-	// Fetch entries
-	$entries = $wpdb->get_results(
-		$wpdb->prepare(
-			"SELECT * FROM {$entries_table} WHERE form_id = %d",
-			$form_id
-		)
-	);
+		// Validate and sanitize the form ID from the request
+		$form_id = isset($request['form_id']) ? intval($request['form_id']) : 0;
+		if ($form_id <= 0) {
+			return new WP_Error('invalid_form_id', 'Invalid form ID', ['status' => 400]);
+		}
 
-	if (empty($entries)) {
-		return new WP_Error('no_entries', 'No entries found for this form', ['status' => 404]);
+		// Define the entries table
+		$entries_table = $wpdb->prefix . 'wpforms_entries';
+
+		// Fetch entries from the database
+		$entries = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$entries_table} WHERE form_id = %d",
+				$form_id
+			),
+			ARRAY_A // Return results as an associative array
+		);
+
+		// Check if no entries are found
+		if (empty($entries)) {
+			return new WP_Error('no_entries', 'No entries found for this form', ['status' => 404]);
+		}
+
+		// Process the fields JSON for each entry
+		foreach ($entries as &$entry) {
+			if (!empty($entry['fields'])) {
+				$entry['fields'] = json_decode($entry['fields'], true); // Convert JSON to an array
+			}
+		}
+
+		// Return the processed entries
+		return rest_ensure_response($entries);
 	}
-
-	// Create an array to hold the updated entries
-	// $updated_entries = [];
-
-	// foreach ($entries as $entry) {
-	// 	// Fetch fields for the current entry
-	// 	$fields = $wpdb->get_results(
-	// 		$wpdb->prepare(
-	// 			"SELECT * FROM {$fields_table} WHERE entry_id = %d",
-	// 			$entry->entry_id
-	// 		)
-	// 	);
-	// 	// Create a new object or array with fields added
-	// 	$updated_entry = (array) $entry; // Convert object to array
-	// 	$updated_entry['fields'] = $fields; // Add fields
-
-	// 	// Add to the updated entries array
-	// 	$updated_entries[] = $updated_entry;
-	// }
-
-	return rest_ensure_response($entries);
 }
