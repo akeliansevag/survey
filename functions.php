@@ -69,23 +69,23 @@ function get_wpforms_entries($request)
 	}
 
 	// Create an array to hold the updated entries
-	$updated_entries = [];
+	// $updated_entries = [];
 
-	foreach ($entries as $entry) {
-		// Fetch fields for the current entry
-		$fields = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$fields_table} WHERE entry_id = %d",
-				$entry->entry_id
-			)
-		);
-		// Create a new object or array with fields added
-		$updated_entry = (array) $entry; // Convert object to array
-		$updated_entry['fields'] = $fields; // Add fields
+	// foreach ($entries as $entry) {
+	// 	// Fetch fields for the current entry
+	// 	$fields = $wpdb->get_results(
+	// 		$wpdb->prepare(
+	// 			"SELECT * FROM {$fields_table} WHERE entry_id = %d",
+	// 			$entry->entry_id
+	// 		)
+	// 	);
+	// 	// Create a new object or array with fields added
+	// 	$updated_entry = (array) $entry; // Convert object to array
+	// 	$updated_entry['fields'] = $fields; // Add fields
 
-		// Add to the updated entries array
-		$updated_entries[] = $updated_entry;
-	}
+	// 	// Add to the updated entries array
+	// 	$updated_entries[] = $updated_entry;
+	// }
 
-	return rest_ensure_response($updated_entries);
+	return rest_ensure_response($entries);
 }
