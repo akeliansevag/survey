@@ -81,7 +81,7 @@ function get_wpforms_entries($request)
 }
 
 add_action('rest_api_init', function () {
-	register_rest_route('wpforms/v1', '/forms', [
+	register_rest_route('wpforms/v1', '/allforms', [
 		'methods' => 'GET',
 		'callback' => 'get_wpforms_list',
 	]);
