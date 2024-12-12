@@ -54,7 +54,7 @@ function get_wpforms_entries($request)
 	global $wpdb;
 	$form_id = intval($request['form_id']);
 	$entries_table = $wpdb->prefix . 'wpforms_entries';
-	$fields_table = $wpdb->prefix . 'wpforms_entries_fields';
+	$fields_table = $wpdb->prefix . 'wpforms_entry_fields';
 
 	// Fetch entries
 	$entries = $wpdb->get_results(
