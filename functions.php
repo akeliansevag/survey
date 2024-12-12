@@ -46,7 +46,6 @@ add_action('rest_api_init', function () {
 	register_rest_route('wpforms/v1', '/entries/(?P<form_id>\d+)', [
 		'methods' => 'GET',
 		'callback' => 'get_wpforms_entries',
-		'permission_callback' => '__return_true', // Public access
 	]);
 });
 
@@ -55,43 +54,29 @@ function get_wpforms_entries($request)
 	global $wpdb;
 	$form_id = intval($request['form_id']);
 	$entries_table = $wpdb->prefix . 'wpforms_entries';
+	$fields_table = $wpdb->prefix . 'wpforms_entries_fields';
 
-	// Fetch data
+	// Fetch entries
 	$entries = $wpdb->get_results(
-		$wpdb->prepare("SELECT entry_id, date FROM wp_wpforms_entries WHERE form_id = %d", $form_id)
+		$wpdb->prepare(
+			"SELECT * FROM {$entries_table} WHERE form_id = %d",
+			$form_id
+		)
 	);
 
 	if (empty($entries)) {
 		return new WP_Error('no_entries', 'No entries found for this form', ['status' => 404]);
 	}
 
+	// Fetch fields for each entry
+	foreach ($entries as $entry) {
+		$entry->fields = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$fields_table} WHERE entry_id = %d",
+				$entry->id
+			)
+		);
+	}
+
 	return rest_ensure_response($entries);
 }
-
-
-add_action('rest_api_init', function () {
-	register_rest_route('wpforms/v1', '/forms', [
-		'methods' => 'GET',
-		'callback' => 'get_wpforms_list',
-	]);
-});
-
-function get_wpforms_list()
-{
-	$forms = wpforms()->form->get();
-	if (empty($forms)) {
-		return new WP_Error('no_forms', 'No forms found', ['status' => 404]);
-	}
-	return rest_ensure_response($forms);
-}
-
-
-add_action('rest_api_init', function () {
-	register_rest_route('wpforms/v1', '/test', [
-		'methods' => 'GET',
-		'callback' => function () {
-			return ['message' => 'API is working'];
-		},
-		'permission_callback' => '__return_true',
-	]);
-});
