@@ -51,11 +51,23 @@ add_action('rest_api_init', function () {
 
 function get_wpforms_entries($request)
 {
+	global $wpdb;
 	$form_id = intval($request['form_id']);
-	return rest_ensure_response([
-		'form_id' => $form_id,
-		'entries' => [],
-	]);
+	$entries_table = $wpdb->prefix . 'wpforms_entries';
+
+	// Example query
+	$entries = $wpdb->get_results(
+		$wpdb->prepare(
+			"SELECT id, date FROM {$entries_table} WHERE form_id = %d",
+			$form_id
+		)
+	);
+
+	if (empty($entries)) {
+		return new WP_Error('no_entries', 'No entries found for this form', ['status' => 404]);
+	}
+
+	return rest_ensure_response($entries);
 }
 
 add_action('rest_api_init', function () {
