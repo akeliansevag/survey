@@ -46,6 +46,7 @@ add_action('rest_api_init', function () {
 	register_rest_route('wpforms/v1', '/entries/(?P<form_id>\d+)', [
 		'methods' => 'GET',
 		'callback' => 'get_wpforms_entries',
+		'permission_callback' => '__return_true', // Public access
 	]);
 });
 
@@ -55,12 +56,9 @@ function get_wpforms_entries($request)
 	$form_id = intval($request['form_id']);
 	$entries_table = $wpdb->prefix . 'wpforms_entries';
 
-	// Example query
+	// Fetch data
 	$entries = $wpdb->get_results(
-		$wpdb->prepare(
-			"SELECT id, date FROM {$entries_table} WHERE form_id = %d",
-			$form_id
-		)
+		$wpdb->prepare("SELECT id, date FROM {$entries_table} WHERE form_id = %d", $form_id)
 	);
 
 	if (empty($entries)) {
@@ -69,6 +67,7 @@ function get_wpforms_entries($request)
 
 	return rest_ensure_response($entries);
 }
+
 
 add_action('rest_api_init', function () {
 	register_rest_route('wpforms/v1', '/forms', [
