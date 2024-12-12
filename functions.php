@@ -102,3 +102,14 @@ function get_wpforms_list()
 	}
 	return rest_ensure_response($forms);
 }
+
+
+add_action('rest_api_init', function () {
+	register_rest_route('wpforms/v1', '/test', [
+		'methods' => 'GET',
+		'callback' => function () {
+			return ['message' => 'API is working'];
+		},
+		'permission_callback' => '__return_true',
+	]);
+});
